@@ -11,3 +11,5 @@
 * React
 * Node
 * Postman
+* JWT
+* Heroku
