@@ -8,6 +8,7 @@
 
 * MongoDB
 * Express
+* Express Validator
 * React
 * Node
 * Postman
