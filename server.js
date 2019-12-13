@@ -15,7 +15,9 @@ app.get('/', (req, res) => res.send('Server running'));
 
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/users', require('./routes/api/users'));
-app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/profile', require('./routes/api/profile/profile'));
+app.use('/api/profile/experience', require('./routes/api/profile/experience'));
+app.use('/api/profile/education', require('./routes/api/profile/education'));
 app.use('/api/posts', require('./routes/api/posts'));
 
 
