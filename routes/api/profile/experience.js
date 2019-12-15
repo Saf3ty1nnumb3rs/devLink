@@ -7,7 +7,7 @@ const auth = require('../../../middleware/auth');
 const Profile = require('../../../models/Profile');
 
 // @route  PUT api/profile/experience
-// @desc   Delete profile, user & posts
+// @desc   Add experience to profile
 // @access Private
 
 router.put('/', [auth, [
