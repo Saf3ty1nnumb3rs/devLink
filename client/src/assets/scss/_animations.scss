@@ -1,0 +1,97 @@
+@keyframes fade-in {
+
+  0% {
+    opacity: 0;
+  }
+
+  90% {
+    opacity: 1;
+  }
+}
+
+@keyframes ball-pulse-sync {
+
+  33% {
+    transform: translateY(10px);
+  }
+
+  66% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-from-bottom {
+
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-from-right {
+
+  0% {
+    opacity: 0;
+    transform: translateX(175px);
+  }
+
+  80% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes dropIn {
+  0% {
+    transform: translateY(-100vh);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes colorChange {
+  from {
+    background-color: #3a4245
+  }
+
+  ;
+
+  to {
+    background-color: #6a777c
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100vw);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(200vw);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
