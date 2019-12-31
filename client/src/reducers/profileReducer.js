@@ -6,18 +6,12 @@ import {
   GET_PROFILES,
   GET_REPOS
 } from '../actions/types';
+import profileState from './initialState';
 
-const initialState = {
-  profile: null,
-  profiles: [],
-  repos: [],
-  loading: true,
-  error: {}
-};
+const initialState = profileState.profile;
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
-
   switch (type) {
     case GET_PROFILE:
     case UPDATE_PROFILE:

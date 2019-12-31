@@ -20,7 +20,7 @@ export const isEmailValid = (email) => {
   } else if (!emailFilter.test(email)) {
     console.log(email, emailFilter.test(email))
     isValid = false;
-  } else if (email.length < 2) {
+  } else if (email.length < 6) {
     isValid = false;
   }
   return isValid;

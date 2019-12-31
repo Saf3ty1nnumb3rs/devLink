@@ -43,6 +43,8 @@ img {
   top: 0;
   border-bottom: solid 1px $primary-color;
   opacity: 0.9;
+  transition-property: top;
+  transition-duration: 750ms;
 
   ul {
     display: flex;
@@ -190,6 +192,19 @@ img {
 
   img {
     width: 150px;
+  }
+}
+
+.flex-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 186px;
   }
 }
 

@@ -1,6 +1,21 @@
 .form {
   &-group {
     margin: 1.2rem 0;
+
+    &.social-input {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      input[type='text'],
+      input[type='email'],
+      input[type='password'],
+      input[type='date'],
+      select,
+      textarea {
+        width: 95%;
+      }
+    }
   }
 
   &-text {
