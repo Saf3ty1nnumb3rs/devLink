@@ -99,7 +99,7 @@ const PostItem = ({
               Posted on <Moment format='YYYY/MM/DD'>{date}</Moment>
             </p>
             {edited.updated && (
-              <p className="m-1">
+              <p className='post-date m-1'>
                 <small>
                   *Edited on {editedOn}
                 </small>
