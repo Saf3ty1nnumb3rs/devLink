@@ -31,20 +31,21 @@ export default function (state = initialState, action) {
         ...state,
         error: payload,
         loading: false,
-        profile: null
+        loadingGit: false
       };
     case CLEAR_PROFILE:
       return {
         ...state,
         profile: null,
         repos: [],
-        loading: false
+        loading: false,
+        error: null
       };
     case GET_REPOS:
       return {
         ...state,
         repos: payload,
-        loading: false
+        loadingGit: false
       };
     default:
       return state;

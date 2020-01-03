@@ -3,7 +3,9 @@ export default {
   auth: {
     isAuthenticated: null,
     loading: true,
-    user: null,
+    user: {
+      admin: false
+    },
     token: localStorage.getItem('token'),
   },
   profile: {
@@ -11,8 +13,13 @@ export default {
     profiles: [],
     repos: [],
     loading: true,
+    loadingGit: true,
+    error: {}
+  },
+  post: {
+    posts: [],
+    post: null,
+    loading: true,
     error: {}
   }
-
-
 }

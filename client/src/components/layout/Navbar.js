@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/authActions';
 
-const Navbar = ({ isAuthenticated, loading, logout }) => {
+const Navbar = ({ isAuthenticated, loading, logout, auth }) => {
   window.onscroll = () => {
     let currentScrollPos = window.pageYOffset;
     if (currentScrollPos < 62) {
@@ -16,6 +16,8 @@ const Navbar = ({ isAuthenticated, loading, logout }) => {
 
   const authLinks = (
     <ul>
+      <li><Link to="/profiles">Developers</Link></li>
+      <li><Link to='/posts'>Posts</Link></li>
       <li>
         <Link to='/dashboard'>
           <i className="fas fa-user"></i>{' '}
@@ -32,7 +34,7 @@ const Navbar = ({ isAuthenticated, loading, logout }) => {
   );
   const guestLinks = (
     <ul>
-      <li><Link to="profiles.html">Developers</Link></li>
+      <li><Link to="/profiles">Developers</Link></li>
       <li><Link to="/register">Register</Link></li>
       <li><Link to="/login">Login</Link></li>
     </ul>
@@ -42,11 +44,13 @@ const Navbar = ({ isAuthenticated, loading, logout }) => {
     return <Redirect to="/" />;
   };
   const links = !loading && (<>{isAuthenticated ? authLinks : guestLinks}</>);
-  const home = (<>{isAuthenticated ? <Link to="/dashboard"><i className="fas fa-code"></i> DevLink</Link> : <Link to="/"><i className="fas fa-code"></i> DevLink</Link>}</>);
+  const home = isAuthenticated ? '/dashboard' : '/';
+  const admin = (auth.user && auth.user.admin) ? 'Admin' : '';
+  // const home = (<>{isAuthenticated ? <Link to="/dashboard"><i className="fas fa-code"></i> DevLink</Link> : <Link to="/"><i className="fas fa-code"></i> DevLink</Link>}</>);
   return (
     <nav id="nav-header" className="navbar bg-dark">
       <h1>
-        {home}
+        <Link to={home}><i className="fas fa-code"></i> DevLink {admin}</Link>
       </h1>
       {links}
     </nav>

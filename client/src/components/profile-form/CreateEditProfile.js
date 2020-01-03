@@ -3,9 +3,10 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Input from '../shared/Input';
+import Form from '../shared/Form';
 import { createProfile, getCurrentProfile } from '../../actions/profileActions';
 
-const CreateProfile = ({
+const CreateEditProfile = ({
   createProfile,
   getCurrentProfile,
   profile: { profile, loading },
@@ -25,7 +26,9 @@ const CreateProfile = ({
     youtube: '',
     instagram: ''
   });
+
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
+
   const {
     company,
     website,
@@ -41,16 +44,12 @@ const CreateProfile = ({
     instagram
   } = formData;
   const edit = history.location.pathname.includes('edit');
-  const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const onSubmit = e => {
-    e.preventDefault();
-    createProfile(formData, history, edit);
-  };
 
   useEffect(() => {
     getCurrentProfile();
+  }, [getCurrentProfile]);
+
+  useEffect(() => {
     if (edit) {
       setFormData({
         company: loading || !profile.company ? '' : profile.company,
@@ -68,8 +67,18 @@ const CreateProfile = ({
         instagram: loading || !profile.social ? '' : profile.social.instagram
       });
     }
-  }, [loading, getCurrentProfile, edit]);
+  }, [loading, edit, profile]);
+
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = e => {
+    e.preventDefault();
+    createProfile(formData, history, edit);
+  };
+
   const action = edit ? 'Edit' : 'Create';
+
   return loading && profile === null ? (
     <Redirect to='/dashboard' />
   ) : (
@@ -79,8 +88,8 @@ const CreateProfile = ({
           <i className='fas fa-user' /> Let's get some information to make your
           profile stand out
 			</p>
-        <p className="lean bold">* = required field</p>
-        <form className='form' onSubmit={e => onSubmit(e)}>
+        <p className="lean bold danger">* = required field</p>
+        <Form className='form' onSubmit={e => onSubmit(e)}>
           <div className='form-group'>
             <select name='status' value={status} onChange={e => onChange(e)}>
               <option value='0'>* Select Professional Status</option>
@@ -215,16 +224,16 @@ const CreateProfile = ({
               <Link to='/dashboard'>
                 <i className='fas fa-arrow-alt-circle-left fa-2x' />
               </Link>
-              <p>Back To Dashboard</p>
+              <p className="m-1">Back To Dashboard</p>
             </div>
             <Input type='submit' value='Submit' className='btn btn-primary my-1' />
           </div>
-        </form>
+        </Form>
       </>
     );
 }
 
-CreateProfile.propTypes = {
+CreateEditProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
@@ -232,4 +241,4 @@ CreateProfile.propTypes = {
 const mapStateToProps = state => ({
   profile: state.profile
 });
-export default withRouter(connect(mapStateToProps, { createProfile, getCurrentProfile })(CreateProfile));
+export default withRouter(connect(mapStateToProps, { createProfile, getCurrentProfile })(CreateEditProfile));

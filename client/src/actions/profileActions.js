@@ -27,7 +27,6 @@ import {
 export const getCurrentProfile = () => async dispatch => {
   try {
     const res = await getCurrent();
-    console.log(res.data)
     dispatch({
       type: GET_PROFILE,
       payload: res.data
@@ -69,13 +68,13 @@ export const getProfileById = userId => async dispatch => {
       payload: res.data
     });
   } catch (err) {
+    if (err.response.status === 400) dispatch(setAlert('No matching profile found.', 'danger'));
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
 };
-
 // Get Github repos
 export const getGithubRepos = username => async dispatch => {
   try {
@@ -101,7 +100,6 @@ export const createProfile = (
 ) => async dispatch => {
   try {
     const res = await createAndUpdateProfile(formData);
-
     dispatch({
       type: GET_PROFILE,
       payload: res.data
@@ -111,6 +109,8 @@ export const createProfile = (
 
     if (!edit) {
       history.push('/dashboard');
+    } else {
+      history.push('/profiles')
     }
   } catch (err) {
     const errors = err.response.data.errors;
@@ -227,7 +227,7 @@ export const deleteAccount = () => async dispatch => {
       dispatch({ type: CLEAR_PROFILE });
       dispatch({ type: ACCOUNT_DELETED });
 
-      dispatch(setAlert('Your account has been permanantly deleted'));
+      dispatch(setAlert('Your account has been permanently deleted'));
     } catch (err) {
       dispatch({
         type: PROFILE_ERROR,

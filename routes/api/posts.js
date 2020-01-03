@@ -56,9 +56,8 @@ router.put('/:post_id', [
     if (!ogPost) { // If post not found
       res.status(404).json({ errors: [{ msg: 'Resource Not Found' }] });
 
-    } else if (ogPost.user.toString() !== req.user.id) { // if incorrect user somehow attempts to access resource
+    } else if (!req.headers.admin && ogPost.user.toString() !== req.user.id) { // if incorrect user somehow attempts to access resource
       res.status(401).json({ errors: [{ msg: 'Invalid Credentials; User not authorized' }] });
-
     } else {
       const { text } = req.body; // only value that should change
       const { name, avatar, user, likes, comments, date } = ogPost // all other values should remain the same
@@ -132,7 +131,7 @@ router.delete('/:id', auth, async (req, res) => {
       return res.status(404).json({ msg: 'Post Not Found' });
     }
     // Check on the user
-    if (post.user.toString() !== req.user.id) {
+    if (!req.headers.admin && post.user.toString() !== req.user.id) {
       return res.status(401).json({ errors: [{ msg: 'Invalid Credentials; User not authorized' }] });
     }
     await post.remove();
@@ -235,13 +234,17 @@ router.put('/:post_id/comment/:com_id', [
   if (!errors.isEmpty()) res.status(400).json({ errors: errors.array() });
 
   try {
-    const user = await User.findById(req.user.id).select('-password');
     const ogPost = await Post.findById(req.params.post_id);
     const newComment = {
       text: req.body.text,
-      name: user.name,
-      avatar: user.avatar,
-      user: req.user.id
+      name: req.body.name,
+      avatar: req.body.avatar,
+      user: req.body.user,
+      edited: {
+        updated: true,
+        date: Date.now()
+      },
+      date: req.body.date
     };
     const post = await Post.findOneAndUpdate(
       { user: ogPost.user, 'comments._id': req.params.com_id },

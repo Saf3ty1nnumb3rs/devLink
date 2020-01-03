@@ -31,7 +31,7 @@ const AddExperience = ({ addExperience, history }) => {
         <i className='fas fa-code-branch' /> Add any developer/programming positions
         that you have had in the past
       </p>
-      <p className="lean bold">* = required field</p>
+      <p className="lean bold danger">* = required field</p>
       <form
         className='form'
         onSubmit={e => {

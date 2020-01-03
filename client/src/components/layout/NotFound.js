@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 function NotFound(props) {
   const page = props.location.pathname.slice(1, props.location.pathname.length);
-  console.log(page)
   return (
     <>
       <h1 className="x-large text-primary">

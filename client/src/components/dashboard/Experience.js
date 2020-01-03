@@ -15,8 +15,8 @@ const Experience = ({ experience, deleteExperience }) => {
         {exp.to === null ? (
           ' Now'
         ) : (
-          <Moment format="YYYY/MM/DD">{moment.utc(exp.to)}</Moment>
-        )}
+            <Moment format="YYYY/MM/DD">{moment.utc(exp.to)}</Moment>
+          )}
       </td>
       <td>
         <button
@@ -32,17 +32,19 @@ const Experience = ({ experience, deleteExperience }) => {
   return (
     <Fragment>
       <h2 className="my-2">Experience Credentials</h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Company</th>
-            <th className="hide-sm">Title</th>
-            <th className="hide-sm">Years</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>{experiences}</tbody>
-      </table>
+      {experience.length < 1 ? <p>Add experience above.</p> : (
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th className="hide-sm">Title</th>
+              <th className="hide-sm">Years</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>{experiences}</tbody>
+        </table>
+      )}
     </Fragment>
   );
 };

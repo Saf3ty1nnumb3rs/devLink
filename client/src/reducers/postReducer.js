@@ -5,18 +5,15 @@ import {
   DELETE_POST,
   ADD_POST,
   GET_POST,
+  EDIT_POST,
   ADD_COMMENT,
+  EDIT_COMMENT,
   REMOVE_COMMENT
 } from '../actions/types';
+import initialState from './initialState';
+const baseState = initialState.post;
 
-const initialState = {
-  posts: [],
-  post: null,
-  loading: true,
-  error: {}
-};
-
-export default function (state = initialState, action) {
+export default function (state = baseState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -38,6 +35,14 @@ export default function (state = initialState, action) {
         posts: [payload, ...state.posts],
         loading: false
       };
+    case EDIT_POST:
+      return {
+        ...state,
+        posts: state.posts.map(post =>
+          post._id === payload.id ? { ...post, text: payload.text } : post
+        ),
+        loading: false
+      }
     case DELETE_POST:
       return {
         ...state,
@@ -64,6 +69,12 @@ export default function (state = initialState, action) {
         post: { ...state.post, comments: payload },
         loading: false
       };
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        post: { ...state.post, comments: payload.comments },
+        loading: false
+      }
     case REMOVE_COMMENT:
       return {
         ...state,

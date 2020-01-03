@@ -4,7 +4,6 @@ export const isNameValid = (name) => {
   if (name === '') {
     isValid = false;
   } else if (!nameFilter.test(name)) {
-    console.log(name, nameFilter.test(name))
     isValid = false;
   } else if (name.length < 2) {
     isValid = false;
@@ -18,7 +17,6 @@ export const isEmailValid = (email) => {
   if (email === '') {
     isValid = false;
   } else if (!emailFilter.test(email)) {
-    console.log(email, emailFilter.test(email))
     isValid = false;
   } else if (email.length < 6) {
     isValid = false;

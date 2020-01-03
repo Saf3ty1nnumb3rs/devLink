@@ -43,6 +43,16 @@ const PostSchema = new Schema({
       date: {
         type: Date,
         default: Date.now
+      },
+      edited: {
+        updated: {
+          type: Boolean,
+          default: false,
+        },
+        date: {
+          type: Date,
+          default: Date.now
+        }
       }
     }
   ],
@@ -59,6 +69,10 @@ const PostSchema = new Schema({
       type: Date,
       default: Date.now
     },
+  },
+  adminDisable: {
+    type: Boolean,
+    default: false
   }
 });
 

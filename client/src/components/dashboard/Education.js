@@ -15,8 +15,8 @@ const Education = ({ education, deleteEducation }) => {
         {edu.to === null ? (
           ' Now'
         ) : (
-          <Moment format="YYYY/MM/DD">{moment.utc(edu.to)}</Moment>
-        )}
+            <Moment format="YYYY/MM/DD">{moment.utc(edu.to)}</Moment>
+          )}
       </td>
       <td>
         <button
@@ -32,17 +32,19 @@ const Education = ({ education, deleteEducation }) => {
   return (
     <Fragment>
       <h2 className="my-2">Education Credentials</h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>School</th>
-            <th className="hide-sm">Degree</th>
-            <th className="hide-sm">Years</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>{educations.length > 0 ? educations : <p>No education listed</p>}</tbody>
-      </table>
+      {educations.length < 1 ? <p>No education listed. Add education above.</p> : (
+        <table className="table">
+          <thead>
+            <tr>
+              <th>School</th>
+              <th className="hide-sm">Degree</th>
+              <th className="hide-sm">Years</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>{educations}</tbody>
+        </table>
+      )}
     </Fragment>
   );
 };
