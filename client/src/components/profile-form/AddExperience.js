@@ -107,7 +107,7 @@ const AddExperience = ({ addExperience, history }) => {
             <Link to='/dashboard'>
               <i className='fas fa-arrow-alt-circle-left fa-2x' />
             </Link>
-            <p>Back To Dashboard</p>
+            <p className="m-1">Back To Dashboard</p>
           </div>
           <Input type='submit' value='Submit' className='btn btn-primary my-1' />
         </div>
